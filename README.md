@@ -17,15 +17,11 @@ Python client for InfluxDB: https://github.com/influxdata/influxdb-python
 
 (please follow instructions for installation of the above two - that should suffice)
 
+Edit run.sh and change watch BLE address and friendly name
+
 #### Sample cron job ####
 ```sh
-#!/bin/bash
-#cron job for reading fitness watch data to InfluxDB
-
-sudo hciconfig hci0 down
-sudo hciconfig hci0 up
-sudo python /home/pi/MiBand2/ble-watch-read.py 00:00:00:00:00:00 hr_watch_mom
-sudo hciconfig hci0 down
+*/5 * * * * [path_to_script_dir]/run.sh
 ```
 
 #### Sample config file (default.config) ####
@@ -33,6 +29,9 @@ sudo hciconfig hci0 down
 [DEFAULT]
 #frequency of reading watch data (minutes)
 check_frequency = 15
+
+# for how many previous hours data should be read from band, do not use more than couple of days because of ble timeout
+prev_hours = 24
 
 #Influx DB params
 influx_host = myweb.com
