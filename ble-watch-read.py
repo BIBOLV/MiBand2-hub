@@ -177,7 +177,7 @@ def write_time_to_file():
 
 try:
         band.authenticate()
-		set_time()
+	set_time()
         get_historical_data()
         get_steps()
         get_distance()
